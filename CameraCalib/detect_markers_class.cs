@@ -147,13 +147,13 @@ namespace CameraCalib
                 {
                     int frame_num = 0;
                     var spstring = file_name.ToString().Split(sp).Last();
-                    try 
-                    { 
-                    frame_num = Convert.ToInt32(spstring.Substring(0, spstring.IndexOf(".jpg")));
-                    }
-                    catch(ArgumentOutOfRangeException e)
+                    try
                     {
-                        Console.WriteLine(e);
+                        frame_num = Convert.ToInt32(spstring.Substring(0, spstring.IndexOf(".jpg")));
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Console.WriteLine("{cam_num}번 진행중");
                     }
                     //Console.WriteLine(frame_num);
                     //if (spstring.GetType() == 1.GetType())
@@ -263,9 +263,9 @@ namespace CameraCalib
         public int Compare(string a, string b)
         {
             string[] arr1 = a.Split('\\');
-            string[] arr1_1 = arr1[5].Split('.');
+            string[] arr1_1 = arr1[arr1.Count() - 1].Split('.');
             string[] arr2 = b.Split('\\');
-            string[] arr2_1 = arr2[5].Split('.');
+            string[] arr2_1 = arr2[arr1.Count()-1].Split('.');
             int int1 = int.Parse(arr1_1[0]);
             int int2 = int.Parse(arr2_1[0]);
             return int1.CompareTo(int2);

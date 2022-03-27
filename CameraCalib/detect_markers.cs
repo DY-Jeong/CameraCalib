@@ -43,18 +43,24 @@ namespace CameraCalib
                     }
                     //detectedlist[i] = _cornersource[i].ToList();
                     //detectedlist[i] = _cornersource[i];
-                    
+
 
                     //if (_ids[i] != 17 & _ids[i] != 37)
                     //{
                     //}
-                    if (_ids[i] == 17 ^ _ids[i] == 37 ^ _ids[i] == 5) // 
+                    /*if (_ids[i] == 17 ^ _ids[i] == 37 ^ _ids[i] == 5) // 
                     {
                         Console.WriteLine("17 or 37 or 5detected");
                         detectedlist.RemoveAt(detectedlist.Count - 1);
                         
+                    }*/
+                    if (_ids[i] >= 5) // 
+                    {
+                        Console.WriteLine("17 or 37 or 5detected");
+                        detectedlist.RemoveAt(detectedlist.Count - 1);
+
                     }
-                    
+
                     i++;
                     //continue;
                     //i=0, ID가 17, 37일때 문제발생함
@@ -92,7 +98,7 @@ namespace CameraCalib
             try
             {
 
-                string folderpath = "H:\\ShareFolder\\20220215Markers\\Dataset";
+                string folderpath = "I:\\20220314KICT1\\Dataset_OLD";
                 //args[0];
                 Dataset dataset = new Dataset();
                 dataset._Dataset(folderpath);
@@ -209,7 +215,7 @@ namespace CameraCalib
                             //int[] ids = new int[5] { 0, 1, 2, 3, 4 };
                             //new_Markers 반복문
 
-                            //points = dataset.get_markercoordinate(new_markers[cam]); 그릴려면 쓰는코드
+                            //points = dataset.get_markercoordinate(new_markers[cam]); //그릴려면 쓰는코드
                             //CvAruco.DrawDetectedMarkers(tmp_img, points, marker_ids, Scalar.Red);
 
 
@@ -257,6 +263,7 @@ namespace CameraCalib
                         }
                         //Cv2.ImShow("cam_" + cam.ToString(), tmp_img);그릴려면 쓰는코드
                         //Cv2.WaitKey(1);
+                        
                     }
 
 
@@ -269,7 +276,8 @@ namespace CameraCalib
             }
             catch(OpenCVException e)
             {
-                Console.WriteLine(e);
+
+                //Console.WriteLine(e);
             }
 
 
