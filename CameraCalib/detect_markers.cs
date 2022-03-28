@@ -98,7 +98,7 @@ namespace CameraCalib
             try
             {
 
-                string folderpath = "I:\\20220314KICT1\\Dataset_OLD";
+                string folderpath = "D:\\20220328KICT\\Calibsdata\\Forcalib";
                 //args[0];
                 Dataset dataset = new Dataset();
                 dataset._Dataset(folderpath);
@@ -261,7 +261,7 @@ namespace CameraCalib
 
 
                         }
-                        //Cv2.ImShow("cam_" + cam.ToString(), tmp_img);그릴려면 쓰는코드
+                        //Cv2.ImShow("cam_" + cam.ToString(), tmp_img);//그릴려면 쓰는코드
                         //Cv2.WaitKey(1);
                         
                     }
