@@ -34,38 +34,25 @@ namespace CameraCalib
                 while (true)
                 {
                     
-                    detectedlist.Add(new Marker());
-                    detectedlist[i].id = _ids[i];
-                    for (int a = 0; a < 4; a++)
+                    if(_ids[i]<5)
                     {
-                        detectedlist[i].Add(new Point2f());
-                        detectedlist[i][a] = _cornersource[i][a];
+                        detectedlist.Add(new Marker());
+                        detectedlist[i].id = _ids[i];
+                        for (int a = 0; a < 4; a++)
+                        {
+                            detectedlist[i].Add(new Point2f());
+                            detectedlist[i][a] = _cornersource[i][a];
+                        }
                     }
-                    //detectedlist[i] = _cornersource[i].ToList();
-                    //detectedlist[i] = _cornersource[i];
-
-
-                    //if (_ids[i] != 17 & _ids[i] != 37)
-                    //{
-                    //}
-                    /*if (_ids[i] == 17 ^ _ids[i] == 37 ^ _ids[i] == 5) // 
-                    {
-                        Console.WriteLine("17 or 37 or 5detected");
-                        detectedlist.RemoveAt(detectedlist.Count - 1);
-                        
-                    }*/
+                    
+      
                     if (_ids[i] >= 5) // 
                     {
                         Console.WriteLine("17 or 37 or 5detected");
-                        detectedlist.RemoveAt(detectedlist.Count - 1);
-
+                        //detectedlist.RemoveAt(detectedlist.Count - 1);
                     }
-
                     i++;
-                    //continue;
-                    //i=0, ID가 17, 37일때 문제발생함
 
-                    ///코드수정
                 }
             }
             catch(IndexOutOfRangeException e) 
@@ -78,15 +65,18 @@ namespace CameraCalib
             {
 
             }
-            if (detectedlist[0].Count==0)
+            
+            if(detectedlist.Count!=0)
             {
-                detectedlist.RemoveAt(detectedlist.Count - 1);
+                if (detectedlist[0].Count == 0)
+                {
+                    detectedlist.RemoveAt(detectedlist.Count - 1);
+                }
+                else if (detectedlist[^1].Count == 0)
+                {
+                    detectedlist.RemoveAt(detectedlist.Count - 1);
+                }
             }
-            else if(detectedlist[^1].Count == 0)
-            {
-                detectedlist.RemoveAt(detectedlist.Count - 1);
-            }
-            //detectedlist.RemoveAt(detectedlist.Count-1);
             return detectedlist;
         }
 
@@ -98,7 +88,7 @@ namespace CameraCalib
             try
             {
 
-                string folderpath = "D:\\20220328KICT\\Calibsdata\\Forcalib";
+                string folderpath = "C:\\Users\\AFDSSPC\\Desktop\\CalibsImage\\calib2";
                 //args[0];
                 Dataset dataset = new Dataset();
                 dataset._Dataset(folderpath);
