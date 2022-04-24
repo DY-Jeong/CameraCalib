@@ -168,7 +168,7 @@ namespace Find_CameratoWorldCor
 
             // Now, we can either write the gradient function of the model by hand or let
             // the model compute it automatically using Newton's finite differences method:
-            // 편미분해서 다 더해?
+            // 편미분해서 RMS구하기
             LeastSquaresGradientFunction gradient = (double[] parameters, double[] input, double[] result) =>
             {
                 result[0] = -((-input[0]) / (parameters[1] + input[0]));
