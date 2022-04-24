@@ -44,8 +44,6 @@ namespace CameraCalib
                             detectedlist[i][a] = _cornersource[i][a];
                         }
                     }
-                    
-      
                     if (_ids[i] >= 5) // 
                     {
                         Console.WriteLine("17 or 37 or 5detected");
@@ -57,13 +55,9 @@ namespace CameraCalib
             }
             catch(IndexOutOfRangeException e) 
             {
-                //detectedlist.RemoveAt(detectedlist.Count - 1);
-                //Console.WriteLine("done");
-
             }
             catch(ArgumentOutOfRangeException e)
             {
-
             }
             
             if(detectedlist.Count!=0)
@@ -88,24 +82,17 @@ namespace CameraCalib
             try
             {
 
-                string folderpath = "C:\\Users\\AFDSSPC\\Desktop\\CalibsImage\\calib2";
-                //args[0];
+                string folderpath = "D:\\AFDSS\\CameraSolution\\20220314test(Recal)";
                 Dataset dataset = new Dataset();
                 dataset._Dataset(folderpath);
                
                 var num_cams = dataset.get_num_cams();
                 string output_file_name = folderpath + "\\aruco.detections";
-                //List<>
                 BinaryWriter output_file = new(new FileStream(output_file_name, FileMode.OpenOrCreate));
-                //var char_var = Convert.ToChar(Convert.ToInt64(num_cams));
                 Console.Write("num_cams 크기");
                 Console.WriteLine(sizeof(long));
                 output_file.Write(Convert.ToInt64(num_cams));
                 
-                //for(int i=0; i<4; i++)
-                //{
-                //    output_file.Write(0);
-                //}
                 const int min_detections_per_marker = 1;
 
                 List<long> frame_nums = new();
@@ -141,27 +128,13 @@ namespace CameraCalib
                     var end = DateTime.Now;
                     var d = end - start;
 
-
-
                     List<List<Marker>> new_markers = new();
                     ListExtras.Resize(new_markers, num_cams);
                     for(int i=0; i<new_markers.Count;i++)
                     {
                         new_markers[i] = new List<Marker>();
                     }
-                    //new_markers[0] = new List<Marker>();
-                    //new_markers[1] = new List<Marker>();
-                    //new_markers[2] = new List<Marker>();
-                    //new_markers[3] = new List<Marker>();
-                    //new_markers[4] = new List<Marker>();
-                    //new_markers[5] = new List<Marker>();
-                    //new_markers[6] = new List<Marker>();
-
-                    //new_markers[3] = new List<Marker>();
-                    //ListExtras.Resize(new_markers[0], 5);
-                    //ListExtras.Resize(new_markers[1], 5);
-                    //ListExtras.Resize(new_markers[2], 5);
-                    //ListExtras.Resize(new_markers[3], 5);
+                   
                     for (int cam=0; cam<num_cams; cam++)
                     {
                         var markers = cam_markers[cam];
@@ -180,21 +153,12 @@ namespace CameraCalib
                     {
                         Mat tmp_img = frames[cam];
                         var new_markers_size = new_markers[cam].Count;
-                        //Convert.ToChar(Convert.ToInt64(new_markers_size));
-                        //Console.Write("new_markers_size 크기");
-                        //Console.WriteLine(sizeof(long));
                         output_file.Write(Convert.ToInt64(new_markers_size));
-                        //for (int i = 0; i < 4; i++)
-                        //{
-                        //    output_file.Write(0);
-                        //}
 
                         for (int m = 0; m < new_markers_size; m++)
                         {
-                            //marker_ids.Add(new_markers[cam][m].id);
                             for (int i = 0; i < new_markers[cam].Count; i++)
                             {
-                                //ids[i] = markers[i].id;
                                 marker_ids.Add(new_markers[cam][i].id);
                             }
                           
@@ -209,47 +173,8 @@ namespace CameraCalib
                             //CvAruco.DrawDetectedMarkers(tmp_img, points, marker_ids, Scalar.Red);
 
 
-                            //marker_ids = marker_ids.Distinct().ToList();
-
-
                             marker_ids.Clear();
-                            //Array.Resize(ref ids, points.Length);
-
-                            //foreach (List<Marker> markers in new_markers)
-                            //{
-                            //    //int[] ids = new int[j];
-                            //    if (markers.Count==0)
-                            //    { continue; }
-                            //    //points = dataset.get_markercoordinate(markers);
-                            //    //if (l==0)
-                            //    //{
-                            //    //    points = dataset.get_markercoordinate(markers);
-                            //    //    //for (int i = 0; i < markers.Count; i++)
-                            //    //    //{
-                            //    //    //    //ids[i] = markers[i].id;
-                            //    //    //    marker_ids.Add(markers[i].id);
-                            //    //    //}
-
-                            //    //}
-                            //    //else
-                            //    //{
-                            //    //    var arr2 = dataset.get_markercoordinate(markers);
-                            //    //    int arrOriginsize = points.Length;
-                            //    //    Array.Resize<Point2f[]>(ref points, arrOriginsize + arr2.Length);
-                            //    //    Array.Copy(arr2, 0, points,arrOriginsize, arr2.Length);
-                            //    //    //for (int i = 0; i < markers.Count; i++)
-                            //    //    //{
-                            //    //    //    //ids.Append(markers[i].id);
-                            //    //    //    marker_ids.Add(markers[i].id);
-                            //    //    //}
-
-                            //    //}
-                            //    l++;
-
-
-                            //}
-
-
+                           
                         }
                         //Cv2.ImShow("cam_" + cam.ToString(), tmp_img);//그릴려면 쓰는코드
                         //Cv2.WaitKey(1);
@@ -270,54 +195,6 @@ namespace CameraCalib
                 //Console.WriteLine(e);
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //string folder_PATH = args[1];
-            
-            //string PATHsensor1 = "Sensorimage1"; //ref camera
-            //string PATHsensor2 = "Sensorimage2";
-            //string PATHsensor3 = "Sensorimage3";
-            //string PATHsensor4 = "Sensorimage4";
-            
-            // set of marker information
-            // marker count : 6
-            // marker Ref number : 1
-            // marker Ref coordinate : {0,0}, {0,0}, {0,0}, {0,0}
-            // marker Size : is it matter?
-
-
-            //test
-            //using var src = ReadPicture(@"C:\Users\jewds\source\repos\CameraCalib\CameraCalib\MVI_2299.MP4_20210722_013547.970.jpg");
-            //GetImageCoordinate(src);
-            ////test
-
-            //List<marker> detectedlist1, detectedlist2, detectedlist3, detectedlist4 = new List<marker>();
-
-            //using var src1 = ReadPicture(PATHsensor1);
-            //detectedlist1 = GetImageCoordinate(src1); //1번 카메라에서 촬영한 마커번호, 마커의 이미지좌표
-            //using var src2 = ReadPicture(PATHsensor2);
-            //detectedlist2 = GetImageCoordinate(src2); //2번 카메라에서 촬영한 마커번호, 마커의 이미지좌표
-            //using var src3 = ReadPicture(PATHsensor3);
-            //detectedlist3 = GetImageCoordinate(src3); //3번 카메라에서 촬영한 마커번호, 마커의 이미지좌표
-            //using var src4 = ReadPicture(PATHsensor4);
-            //detectedlist4 =  GetImageCoordinate(src4); //4번 카메라에서 촬영한 마커번호, 마커의 이미지좌표
-
-
-
-
         }
     }
 }
@@ -325,62 +202,3 @@ namespace CameraCalib
 
 
 
-
-
-//for (int k = 0; k <= 4; k++)
-//{
-//    
-//}
-//static Mat ReadPicture(string PATH)
-//{
-//    //요약:
-//    //     constructs 2D matrix and fills it with the specified Scalar value.
-//    //
-//    // 매개 변수:
-//    //   size:
-//    //     2D array size: Size(cols, rows) . In the Size() constructor, the number of rows
-//    //     and the number of columns go in the reverse order.
-//    //
-//    //   type:
-//    //     Array type. Use MatType.CV_8UC1, ..., CV_64FC4 to create 1-4 channel matrices,
-//    //     or CV_8UC(n), ..., CV_64FC(n) to create multi-channel (up to CV_CN_MAX channels)
-//    //     matrices.
-//    Mat src = new Mat(PATH);
-//    return src;
-//}
-
-//static void Markerpose()
-//{
-
-//}
-
-//static void TransformationBetC()
-//{
-
-//}
-
-//static void TransformationBetm()
-//{
-
-//}
-
-//static void TransformationBetmtoc()
-//{
-
-//}
-
-//static double[] Reprojection()
-//{
-//    double[] val = new double[] { };
-//    return val;
-//}
-//static double[] LMoptimization()
-//{
-//    double[] val = new double[] { };
-//    return val;
-//}
-//static double[] ReprojectionError()
-//{
-//    double[] val = new double[] { };
-//    return val;
-//}
